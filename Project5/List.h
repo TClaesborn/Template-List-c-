@@ -6,7 +6,8 @@ template <typename T> //Skapar en mall för typ T
 class List
 {
 private: //Allt efter private: är private
-	Node<T>* head = nullptr; //Pointer till nästa nod i listan
+	std::shared_ptr<Node<T>> head = nullptr;//Pointer till nästa nod i listan
+	
 public: //Allt efter public: är public
 	List() //Tom constructor
 	{
@@ -14,7 +15,10 @@ public: //Allt efter public: är public
 	}
 	void Add(T data) 
 	{
-		Node<T>* newNode = new Node<T>(data); //Skapar nod att lägga till i listan
+		// I c# finns en automatisk garbage collector som rensar upp minnet under runtime.
+		// c++ har inte det.
+		std::shared_ptr<Node<T>> newNode = std::make_shared<Node<T>>(data); //Skapar nod att lägga till i listan
+		
 		if (head == nullptr) //Kollar om första värdet är tomt
 			head = newNode; //Om tomt, lägg till här.
 		else
@@ -29,9 +33,9 @@ public: //Allt efter public: är public
 	}
 	void RemoveFirst()
 	{
-		auto temp = this->head; //Håll koll på tidigare head.
+		//auto temp = this->head; //Håll koll på tidigare head.
 		head = head->next; //Flytta start på listan.
-		delete temp; //ta bort föregående head (c++ har ingen egen garbage collector som c#)
+		//delete temp; //ta bort föregående head (c++ har ingen egen garbage collector som c#)
 	}
 	void PrintAll()
 	{

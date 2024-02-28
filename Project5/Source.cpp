@@ -7,6 +7,7 @@
 
 int main()
 {
+	
 	List<int> list;
 	list.Add(3);
 	list.Add(5);
@@ -14,4 +15,6 @@ int main()
 	list.Add(12);
 	list.RemoveFirst();
 	list.PrintAll();
+	
+	std::cin.get();
 }
